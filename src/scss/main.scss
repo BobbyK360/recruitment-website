@@ -1,0 +1,7 @@
+//BRING EVERYTHING IN TOGETHER HERE
+@use 'abstracts'as a;
+@use 'components/header';
+
+body {
+    background-color: a.$background-color;
+}

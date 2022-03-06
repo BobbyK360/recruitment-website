@@ -1,0 +1,152 @@
+@use '../abstracts'as a;
+
+header.primary-header {
+    // background-color: black;
+    height: 100px;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    width: 100%;
+    gap: 5rem;
+    background-color: transparent;
+    z-index: 999;
+
+    >nav {
+        flex: 1;
+        position: relative;
+
+        &:first-child {
+            @include a.screenSize(70rem) {
+                position: absolute;
+                // right: 100%;
+                right: 0%;
+            }
+        }
+    }
+
+    >div {
+        height: 100%;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+
+        @include a.screenSize(70rem) {
+            left: 0;
+            transform: translateX(0);
+        }
+
+        >a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+
+            .logo {
+                height: 80%;
+                margin: 0 2rem;
+            }
+        }
+    }
+}
+
+.primary-navigation {
+    /* position: relative; */
+    list-style: none;
+    transition: transform .2s ease-in;
+    gap: clamp(3rem, 5rem, 10rem);
+    margin: 0 2rem;
+
+    a {
+        color: white;
+        display: block;
+        width: 100%;
+        transition: color .1s ease-in-out;
+
+        &:hover {
+            color: a.$main-color;
+        }
+
+        >[aria-hidden="true"] {
+            font-weight: 700;
+            margin-inline-end: .75em;
+            /* display: none; */
+        }
+    }
+
+    @include a.screenSize(90rem) {
+        gap: 1.5rem;
+    }
+
+    @include a.screenSize(42rem) {
+        gap: 3rem;
+        position: fixed;
+        z-index: 1000;
+        inset: 0 0 0 26%;
+        flex-direction: column;
+        padding: min(20vh, 10rem) 2em;
+        background: hsl(0, 0%, 100%, .1);
+        backdrop-filter: blur(1rem);
+        transform: translateX(calc(100% + 2rem));
+
+        &[data-visible="true"] {
+            transform: translateX(2rem);
+        }
+    }
+}
+
+.secondary-navigation {
+    justify-content: flex-end;
+    margin: 0 -2rem;
+    /* background-color: grey; */
+    list-style: none;
+    width: 100%;
+
+    a {
+        color: white;
+        display: block;
+
+        svg {
+            width: 30px;
+            max-height: 30px;
+
+            path {
+                transition: fill .1s ease-in-out;
+            }
+        }
+
+        &:hover path {
+            fill: a.$main-color;
+        }
+    }
+
+    @include a.screenSize(70rem) {
+        display: none;
+    }
+}
+
+.mobile-nav-toggle {
+    display: none;
+
+    @include a.screenSize(42rem) {
+        display: block;
+        position: absolute;
+        background-color: transparent;
+        background-image: url('../img/hamburger.png');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        width: 2rem;
+        aspect-ratio: 1;
+        top: 2rem;
+        right: 2rem;
+        z-index: 9999;
+        border: none;
+        color: white;
+        transition: background-image .2s ease-in;
+
+        &[aria-expanded="true"] {
+            background-image: url('../img/cross.png');
+        }
+    }
+}
